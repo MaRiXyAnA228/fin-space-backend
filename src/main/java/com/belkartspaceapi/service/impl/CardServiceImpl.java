@@ -10,6 +10,7 @@ import com.belkartspaceapi.repository.BankRepository;
 import com.belkartspaceapi.repository.CardRepository;
 import com.belkartspaceapi.repository.ClientRepository;
 import com.belkartspaceapi.service.CardService;
+import com.belkartspaceapi.service.ExternalCardInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,8 @@ public class CardServiceImpl implements CardService {
 
     private final BankRepository bankRepository;
 
+    private final ExternalCardInfoService externalCardInfoService;
+
     @Override
     public List<CardWithBankDTO> findCardsByClientId(Long clientId) {
         return cardRepository.findAllByClientId(clientId)
@@ -43,8 +46,8 @@ public class CardServiceImpl implements CardService {
         Client client = clientRepository.findById(clientId)
                 .orElseThrow(() -> new IllegalArgumentException("Client not found"));
 
-        Bank bank = bankRepository.findById(createCardDTO.bankId())
-                .orElseThrow(() -> new IllegalArgumentException("Bank not found"));
+        Bank bank = externalCardInfoService.getCardDetails(createCardDTO.cardNumber(), createCardDTO.expirationDate().toString())
+                .orElseThrow(() -> new IllegalArgumentException("Bank not found")).bank();
 
         Card card = new Card();
         card.setCardNumber(createCardDTO.cardNumber());

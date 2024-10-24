@@ -6,8 +6,6 @@ public record CreateCardDTO(
 
         Long cardNumber,
 
-        LocalDate expirationDate,
-
-        Long bankId
+        LocalDate expirationDate
 ) {
 }
