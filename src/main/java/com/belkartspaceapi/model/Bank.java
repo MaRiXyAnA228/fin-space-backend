@@ -21,11 +21,16 @@ public class Bank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String bankName;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY)
     private List<Card> cards = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "t_bank_clients",
+            joinColumns = @JoinColumn(name = "bank_id"),
+            inverseJoinColumns = @JoinColumn(name = "clients_id")
+    )
     private List<Client> clients = new ArrayList<>();
 }

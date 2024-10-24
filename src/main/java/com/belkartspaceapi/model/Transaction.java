@@ -21,13 +21,15 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime transactionTime;
+    private BigDecimal amount;
 
-    private BigDecimal sum;
+    private LocalDateTime transactionDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
     private Place place;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id")
     private Card card;
 }

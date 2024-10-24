@@ -29,6 +29,10 @@ public class User implements UserDetails {
 
     private boolean isActive;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "t_user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -52,5 +56,20 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isActive;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 }

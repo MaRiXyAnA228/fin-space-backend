@@ -23,6 +23,6 @@ public class Place {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "place", fetch = FetchType.LAZY)
     private List<Transaction> transactions = new ArrayList<>();
 }
