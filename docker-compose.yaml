@@ -12,6 +12,7 @@ services:
   belkart_space_app:
     build: .
     environment:
+      CORS_ALLOWED_ORIGINS: https://hackatonbpc.netlify.app,http://localhost:9000
       DB_URL: jdbc:postgresql://host.docker.internal:5432/belkart_space_db
       DB_USERNAME: username
       DB_PASSWORD: password
