@@ -5,6 +5,10 @@ public record UserRegisterDTO(
 
         String username,
 
-        String password
+        String password,
+
+        String firstName,
+
+        String lastName
 ) {
 }
