@@ -1,5 +1,6 @@
 package com.belkartspaceapi.service.impl;
 
+import com.belkartspaceapi.dto.UserRegisterDTO;
 import com.belkartspaceapi.model.Role;
 import com.belkartspaceapi.model.User;
 import com.belkartspaceapi.repository.UserRepository;
@@ -20,7 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void registerUser(User user, Role role) {
+    public void registerUser(UserRegisterDTO userRegisterDTO, Role role) {
+        User user = new User();
+
         if (userRepository.findAllByUsername(user.getUsername()).isPresent()) {
             throw new IllegalArgumentException("User with this login already exists");
         }
@@ -29,7 +32,8 @@ public class UserServiceImpl implements UserService {
         }else{
             user.setRoles(Set.of(role));
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setUsername(userRegisterDTO.username());
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.password()));
         user.setActive(true);
         userRepository.save(user);
     }
