@@ -28,6 +28,9 @@ public class Client {
     @OneToOne(mappedBy = "client", fetch = FetchType.LAZY)
     private User user;
 
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ChildClient> childClients = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "t_bank_clients",
