@@ -23,6 +23,8 @@ public class Transaction {
 
     private BigDecimal amount;
 
+    private String category;
+
     private LocalDateTime transactionDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
@@ -29,7 +28,6 @@ public class DataInitializer {
     private final PasswordEncoder passwordEncoder;
 
     @Bean
-    @Profile("dev")
     CommandLineRunner initData() {
         return args -> {
             // Создание клиентов
@@ -158,12 +156,27 @@ public class DataInitializer {
                 Transaction transaction = new Transaction();
                 transaction.setAmount(new BigDecimal(Math.random() * 1000).setScale(2, BigDecimal.ROUND_HALF_UP));
                 transaction.setTransactionDate(LocalDateTime.now().minusDays((long) (Math.random() * 30)));
-                transaction.setPlace(places.get(i % places.size()));
+
+                // Назначаем место транзакции
+                Place place = places.get(i % places.size());
+                transaction.setPlace(place);
+
+                // Назначаем категорию на основе места
+                String category = switch (place.getName()) {
+                    case "Supermarket" -> "Groceries";
+                    case "Restaurant" -> "Dining";
+                    case "Gas Station" -> "Fuel";
+                    case "Cinema" -> "Entertainment";
+                    case "Online Store" -> "Shopping";
+                    default -> "Other";
+                };
+                transaction.setCategory(category);
+
+                // Назначаем случайную карту
                 transaction.setCard(cards.get(i % cards.size()));
 
                 transactionRepository.save(transaction);
             }
-
             // Создание дочерних клиентов
             ChildClient child1 = new ChildClient();
             child1.setName("Backend developer");

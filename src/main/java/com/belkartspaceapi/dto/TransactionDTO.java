@@ -3,7 +3,7 @@ package com.belkartspaceapi.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record TransactionsToChildClientDTO (
+public record TransactionDTO(
 
         Long id,
 
@@ -12,6 +12,8 @@ public record TransactionsToChildClientDTO (
         LocalDateTime transactionDate,
 
         String placeName,
+
+        String category,
 
         Long cardNumber
 ){

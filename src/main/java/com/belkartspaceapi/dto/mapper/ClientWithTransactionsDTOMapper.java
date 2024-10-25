@@ -1,14 +1,13 @@
 package com.belkartspaceapi.dto.mapper;
 
 import com.belkartspaceapi.dto.ClientWithTransactionsDTO;
-import com.belkartspaceapi.dto.TransactionsToChildClientDTO;
+import com.belkartspaceapi.dto.TransactionDTO;
 import com.belkartspaceapi.model.ChildClient;
 import com.belkartspaceapi.model.Transaction;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 
 @Component
 public class ClientWithTransactionsDTOMapper implements Function<ChildClient, ClientWithTransactionsDTO> {
@@ -27,12 +26,13 @@ public class ClientWithTransactionsDTOMapper implements Function<ChildClient, Cl
         );
     }
 
-    private TransactionsToChildClientDTO mapToTransactionDTO(Transaction transaction, Long cardNumber) {
-        return new TransactionsToChildClientDTO(
+    private TransactionDTO mapToTransactionDTO(Transaction transaction, Long cardNumber) {
+        return new TransactionDTO(
                 transaction.getId(),
                 transaction.getAmount(),
                 transaction.getTransactionDate(),
                 transaction.getPlace().getName(),
+                transaction.getCategory(),
                 cardNumber
         );
     }

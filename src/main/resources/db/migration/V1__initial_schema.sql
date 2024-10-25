@@ -40,6 +40,7 @@ CREATE TABLE t_place (
 CREATE TABLE t_transaction (
                                id BIGSERIAL PRIMARY KEY,
                                amount DECIMAL(15, 2) NOT NULL,
+                               category VARCHAR(50) NOT NULL,
                                transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                place_id BIGINT NOT NULL REFERENCES t_place(id) ON DELETE CASCADE,
                                card_id BIGINT NOT NULL REFERENCES t_card(id) ON DELETE CASCADE

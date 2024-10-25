@@ -8,6 +8,6 @@ public record ClientWithTransactionsDTO(
 
         String childClientName,
 
-        List<TransactionsToChildClientDTO> transactions
+        List<TransactionDTO> transactions
 ) {
 }
