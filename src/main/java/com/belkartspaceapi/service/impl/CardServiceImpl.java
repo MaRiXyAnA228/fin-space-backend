@@ -6,7 +6,6 @@ import com.belkartspaceapi.dto.mapper.CardWithBankDTOMapper;
 import com.belkartspaceapi.model.Bank;
 import com.belkartspaceapi.model.Card;
 import com.belkartspaceapi.model.Client;
-import com.belkartspaceapi.repository.BankRepository;
 import com.belkartspaceapi.repository.CardRepository;
 import com.belkartspaceapi.repository.ClientRepository;
 import com.belkartspaceapi.service.CardService;
@@ -27,8 +26,6 @@ public class CardServiceImpl implements CardService {
     private final CardWithBankDTOMapper cardWithBankDTOMapper;
 
     private final ClientRepository clientRepository;
-
-    private final BankRepository bankRepository;
 
     private final ExternalCardInfoService externalCardInfoService;
 

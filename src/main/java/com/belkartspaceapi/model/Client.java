@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -29,7 +29,7 @@ public class Client {
     private User user;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ChildClient> childClients = new ArrayList<>();
+    private Set<ChildClient> childClients = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -37,8 +37,8 @@ public class Client {
             joinColumns = @JoinColumn(name = "clients_id"),
             inverseJoinColumns = @JoinColumn(name = "bank_id")
     )
-    private List<Bank> banks = new ArrayList<>();
+    private Set<Bank> banks = new HashSet<>();
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
-    private List<Card> cards = new ArrayList<>();
+    private Set<Card> cards = new HashSet<>();
 }

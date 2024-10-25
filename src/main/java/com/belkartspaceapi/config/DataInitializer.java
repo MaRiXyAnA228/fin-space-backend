@@ -51,7 +51,7 @@ public class DataInitializer {
 
             Client client5 = new Client();
             client5.setFirstName("Ярослав");
-            client5.setLastName("Бартошевич");
+            client5.setLastName("Барнатович");
 
             clientRepository.saveAll(List.of(client1, client2, client3, client4, client5));
 
@@ -112,11 +112,11 @@ public class DataInitializer {
             bankRepository.saveAll(List.of(bank1, bank2, bank3, bank4, bank5));
 
             // Привязка клиентов к банкам
-            client1.setBanks(List.of(bank1, bank2));
-            client2.setBanks(List.of(bank3));
-            client3.setBanks(List.of(bank4));
-            client4.setBanks(List.of(bank5));
-            client5.setBanks(List.of(bank1, bank5));
+            client1.setBanks(Set.of(bank1, bank2));
+            client2.setBanks(Set.of(bank3));
+            client3.setBanks(Set.of(bank4));
+            client4.setBanks(Set.of(bank5));
+            client5.setBanks(Set.of(bank1, bank5));
 
             clientRepository.saveAll(List.of(client1, client2, client3, client4, client5));
 
