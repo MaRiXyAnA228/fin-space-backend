@@ -1,6 +1,7 @@
 package com.belkartspaceapi.controller;
 
 import com.belkartspaceapi.dto.ClientWithTransactionsDTO;
+import com.belkartspaceapi.dto.CreateClientDTO;
 import com.belkartspaceapi.model.User;
 import com.belkartspaceapi.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,8 +42,8 @@ public class ClientController {
             @ApiResponse(responseCode = "500", description = "Internal server error.")
     })
     @PostMapping
-    public ResponseEntity<String> addClient(@AuthenticationPrincipal User user, @RequestParam String username) {
-        clientService.addClient(user.getClient().getId(), username);
+    public ResponseEntity<String> addClient(@AuthenticationPrincipal User user, @RequestBody CreateClientDTO createClientDTO) {
+        clientService.addClient(user.getClient().getId(), createClientDTO);
         return ResponseEntity.status(201).body("Client added successfully");
     }
 }

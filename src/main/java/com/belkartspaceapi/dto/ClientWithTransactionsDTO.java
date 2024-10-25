@@ -1,14 +1,13 @@
 package com.belkartspaceapi.dto;
 
-import java.time.LocalDate;
+import java.util.List;
 
 public record ClientWithTransactionsDTO(
+
         Long id,
 
-        String bankName,
+        String childClientName,
 
-        Long number,
-
-        LocalDate term
+        List<TransactionsToChildClientDTO> transactions
 ) {
 }

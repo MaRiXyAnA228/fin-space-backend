@@ -50,3 +50,11 @@ CREATE TABLE t_bank_clients (
                                 clients_id BIGINT NOT NULL REFERENCES t_client(id) ON DELETE CASCADE,
                                 PRIMARY KEY (bank_id, clients_id)
 );
+
+CREATE TABLE t_child_client (
+                                id BIGSERIAL PRIMARY KEY,
+                                name VARCHAR(100) NOT NULL,
+                                current_client_id BIGINT REFERENCES t_client(id) ON DELETE CASCADE,
+                                client_id BIGINT NOT NULL REFERENCES t_client(id) ON DELETE CASCADE
+);
+
