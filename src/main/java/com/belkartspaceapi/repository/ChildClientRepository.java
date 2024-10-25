@@ -11,7 +11,7 @@ public interface ChildClientRepository extends JpaRepository<ChildClient, Long> 
             "currentClient",
             "currentClient.cards",
             "currentClient.cards.transactions",
-            "currentClient.transactions.place"
+            "currentClient.cards.transactions.place"
     })
     List<ChildClient> findByClientId(Long clientId);
 }
