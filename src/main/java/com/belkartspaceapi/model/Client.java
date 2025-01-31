@@ -15,7 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "t_client")
-public class Client {
+public class
+Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
