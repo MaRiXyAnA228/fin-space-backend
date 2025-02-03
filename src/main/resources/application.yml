@@ -6,7 +6,18 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
 cors:
   allowed-origins: ${CORS_ALLOWED_ORIGINS}
 server:
   port: 8080
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE

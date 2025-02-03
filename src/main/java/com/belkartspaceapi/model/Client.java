@@ -1,6 +1,7 @@
 package com.belkartspaceapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +16,17 @@ import java.util.Set;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "t_client")
-public class
-Client {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @OneToOne(mappedBy = "client", fetch = FetchType.LAZY)

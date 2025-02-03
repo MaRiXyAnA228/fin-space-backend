@@ -1,6 +1,7 @@
 package com.belkartspaceapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,12 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Column(name = "card_number", nullable = false)
     private Long cardNumber;
 
+    @NotNull
+    @Column(name = "expiration_date", nullable = false)
     private LocalDate expirationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
