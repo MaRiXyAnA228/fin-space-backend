@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "start": "docker build -t my-java-app . && docker run -p 3000:3000 my-java-app"
+  }
+}
