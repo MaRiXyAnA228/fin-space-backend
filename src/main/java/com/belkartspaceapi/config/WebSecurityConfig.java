@@ -40,11 +40,21 @@ public class WebSecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().permitAll()
+                        .requestMatchers("/").hasAnyAuthority("USER","ADMIN")
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                        .anyRequest().authenticated()
                 )
+                .formLogin((form) -> form
+                        .loginProcessingUrl("/api/auth/login")
+                        .successHandler(authenticationSuccessHandler())
+                        .failureHandler(authenticationFailureHandler())
+                        .permitAll()
+                )
+                .logout(LogoutConfigurer::permitAll)
                 .build();
     }
-
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
