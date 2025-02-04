@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void registerUser(UserRegisterDTO userRegisterDTO, Role role) {
-        if (userRepository.findAllByUsername(userRegisterDTO.username()).isPresent()) {
+        if (userRepository.findByUsername(userRegisterDTO.username()).isPresent()) {
             throw new IllegalArgumentException("User with this login already exists");
         }
 
